@@ -1,7 +1,10 @@
-﻿import pip from './pip.svg';
+﻿import React from 'react';
+import pip from './pip.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
+import Contacts from './Contacts.js';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router';
 
 function Navbar() {
     return (
@@ -16,18 +19,37 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" href="#">Головна</a>
+                            <Link className="nav-link active" to="/">Головна</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Новини</a>
+                            <Link className="nav-link" to="#">Про сайт</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Контакти</a>
+                            <Link className="nav-link" to="#">Галерея картинок</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="#">Новини</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="#">Картинки</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/contacts">Контакти</Link>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+    );
+}
+
+function HomePage() {
+    return (
+        <>
+            <InfoCards />
+            <Carousel />
+            <BlocksContainer />
+        </>
     );
 }
 
@@ -40,7 +62,7 @@ function InfoCards() {
                         <div className="card-body">
                             <h5 className="card-title">Опис програми</h5>
                             <p className="card-text">Інформаційний портал для обліку ВНЗ, розроблений на основі сучасних веб-технологій.</p>
-                            <a href="#" className="btn btn-primary">Детальніше</a>
+                            <Link to="#" className="btn btn-primary">Детальніше</Link>
                         </div>
                     </div>
                 </div>
@@ -53,7 +75,7 @@ function InfoCards() {
                                 <li>Управління фінансами</li>
                                 <li>Генерація звітів</li>
                             </ul>
-                            <a href="#" className="btn btn-primary">Детальніше</a>
+                            <Link to="#" className="btn btn-primary">Детальніше</Link>
                         </div>
                     </div>
                 </div>
@@ -104,32 +126,15 @@ function BlocksContainer() {
     );
 }
 
-function Contacts() {
-    return (
-        <footer>
-        <div className="container mt-5">
-            <div className="card w-100 mb-4">
-                <div className="card-body">
-                    <h5 className="card-title">Контакти</h5>
-                    <p className="card-text"><a href="tel:+380 67 123 4567">Phone</a></p>
-                    <p className="card-text"><a href="mailto:https://mail.google.com">Mail</a></p>
-                    
-                </div>
-            </div>
-            </div>
-        </footer>
-    );
-}
-
 function App() {
     return (
-        <div className="App">
+        <Router>
             <Navbar />
-            <InfoCards />
-            <Carousel />
-            <BlocksContainer />
-            <Contacts />
-        </div>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/contacts" element={<Contacts />} />
+            </Routes>
+        </Router>
     );
 }
 
