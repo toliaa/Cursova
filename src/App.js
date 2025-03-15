@@ -12,6 +12,7 @@ import { AuthProvider, useAuth } from './AuthContext';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function Navbar() {
+    const { user } = useAuth();
     return (
         <nav className="navbar navbar-expand-lg fixed-top navbar-gradient">
             <div className="container-fluid">
