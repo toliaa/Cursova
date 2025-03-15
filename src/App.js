@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 import Contacts from './Contacts.js';
 import Login from './components/Auth/Login';
 import AdminPanel from './components/Admin/AdminPanel';
+import Dashboard from './components/Dashboard/Dashboard';
 import { AuthProvider, useAuth } from './AuthContext';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
@@ -41,6 +42,11 @@ function Navbar() {
                         </li>
                     </ul>
                     <ul className="navbar-nav">
+                        {user && (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                            </li>
+                        )}
                         <li className="nav-item">
                             <Link className="nav-link" to="/login">Login</Link>
                         </li>
@@ -166,6 +172,7 @@ function App() {
                     <Route path="/contacts" element={<Contacts />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/admin" element={<AdminPanel />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
             </Router>
         </AuthProvider>
