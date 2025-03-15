@@ -1,10 +1,13 @@
-﻿import React from 'react';
+import React from 'react';
 import pip from './pip.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import Contacts from './Contacts.js';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router';
+import Login from './components/Auth/Login';
+import AdminPanel from './components/Admin/AdminPanel';
+import { AuthProvider } from './AuthContext';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function Navbar() {
     return (
@@ -128,13 +131,17 @@ function BlocksContainer() {
 
 function App() {
     return (
-        <Router>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/contacts" element={<Contacts />} />
-            </Routes>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/contacts" element={<Contacts />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/admin" element={<AdminPanel />} />
+                </Routes>
+            </Router>
+        </AuthProvider>
     );
 }
 
