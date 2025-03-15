@@ -4,7 +4,7 @@ import { useAuth } from '../../AuthContext';
 import { Navigate } from 'react-router-dom';
 
 function AdminPanel() {
-  const { user } = useAuth();
+  const { user, addNews } = useAuth();
   const [newsItem, setNewsItem] = useState({ title: '', content: '' });
   const [image, setImage] = useState(null);
 
@@ -14,8 +14,9 @@ function AdminPanel() {
 
   const handleNewsSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send to backend
-    console.log('News item:', newsItem);
+    addNews(newsItem);
+    setNewsItem({ title: '', content: '' });
+    alert('News added successfully!');
   };
 
   const handleImageSubmit = (e) => {

@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 import Contacts from './Contacts.js';
 import Login from './components/Auth/Login';
 import AdminPanel from './components/Admin/AdminPanel';
-import { AuthProvider } from './AuthContext';
+import { AuthProvider, useAuth } from './AuthContext';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function Navbar() {
@@ -51,11 +51,33 @@ function Navbar() {
     );
 }
 
+function NewsSection() {
+    const { news } = useAuth();
+    return (
+        <div className="container mt-5">
+            <h2>Latest News</h2>
+            <div className="row">
+                {news && news.slice(0, 10).map((item, index) => (
+                    <div key={index} className="col-md-6 mb-4">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">{item.title}</h5>
+                                <p className="card-text">{item.content}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 function HomePage() {
     return (
         <>
             <InfoCards />
             <Carousel />
+            <NewsSection />
             <BlocksContainer />
         </>
     );
