@@ -7,6 +7,7 @@ import Contacts from './Contacts.js';
 import Login from './components/Auth/Login';
 import AdminPanel from './components/Admin/AdminPanel';
 import Dashboard from './components/Dashboard/Dashboard';
+import NotFound from './components/NotFound/NotFound';
 import { AuthProvider, useAuth } from './AuthContext';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
@@ -173,6 +174,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/admin" element={<AdminPanel />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
         </AuthProvider>
