@@ -1,6 +1,7 @@
-﻿.App {
-    font-family: Arial, sans-serif;
-  
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Навігаційне меню */
@@ -96,4 +97,10 @@
     }
 }
 
-
+/* Footer styles */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Push footer to the bottom */
+}

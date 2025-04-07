@@ -16,6 +16,7 @@ import Reports from './components/Categories/Reports';
 import Finance from './components/Categories/Finance';
 import Support from './components/Categories/Support';
 import { AuthProvider, useAuth } from './AuthContext';
+import Footer from './components/Footer/Footer';
 
 function Navbar() {
     const { user, logout } = useAuth();
@@ -209,8 +210,9 @@ function App() {
     return (
         <AuthProvider>
             <Router>
-                <Navbar />
-                <Routes>
+                <div className="App">
+                    <Navbar />
+                    <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/contacts" element={<Contacts />} />
                     <Route path="/login" element={<Login />} />
@@ -232,6 +234,8 @@ function App() {
                     <Route path="/support" element={<Support />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+                    <Footer />
+                </div>
             </Router>
         </AuthProvider>
     );
