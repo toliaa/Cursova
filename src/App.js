@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import pip from './pip.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -185,17 +185,19 @@ function BlocksContainer() {
     );
 }
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children, requiredRole = null }) {
     const { user } = useAuth();
-    const navigate = useNavigate();
+    const location = useLocation();
 
-    useEffect(() => {
-        if (!user || user.role !== 'admin') {
-            navigate('/login');
-        }
-    }, [user, navigate]);
+    if (!user) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
 
-    return user && user.role === 'admin' ? children : null;
+    if (requiredRole && user.role !== requiredRole) {
+        return <Navigate to="/" replace />;
+    }
+
+    return children;
 }
 
 function App() {
@@ -208,11 +210,15 @@ function App() {
                     <Route path="/contacts" element={<Contacts />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/admin" element={
-                        <ProtectedRoute>
+                        <ProtectedRoute requiredRole="admin">
                             <AdminPanel />
                         </ProtectedRoute>
                     } />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard" element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    } />
                     <Route path="/students" element={<Students />} />
                     <Route path="/teachers" element={<Teachers />} />
                     <Route path="/schedule" element={<Schedule />} />

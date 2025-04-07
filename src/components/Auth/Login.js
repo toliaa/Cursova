@@ -14,6 +14,9 @@ function Login() {
     if (credentials.email === 'admin@example.com' && credentials.password === 'admin') {
       login({ email: credentials.email, role: 'admin' });
       navigate('/admin');
+    } else if (credentials.email && credentials.password) {
+      login({ email: credentials.email, role: 'user' });
+      navigate('/dashboard');
     }
   };
 
