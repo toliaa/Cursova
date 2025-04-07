@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import pip from './pip.svg';
@@ -19,7 +18,7 @@ import Support from './components/Categories/Support';
 import { AuthProvider, useAuth } from './AuthContext';
 
 function Navbar() {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     return (
         <nav className="navbar navbar-expand-lg fixed-top navbar-gradient">
             <div className="container-fluid">
@@ -51,14 +50,20 @@ function Navbar() {
                         </li>
                     </ul>
                     <ul className="navbar-nav">
-                        {user && (
+                        {user ? (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" onClick={() => logout()}>Logout</Link>
+                                </li>
+                            </>
+                        ) : (
                             <li className="nav-item">
-                                <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                                <Link className="nav-link" to="/login">Login</Link>
                             </li>
                         )}
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
                     </ul>
                 </div>
             </div>
