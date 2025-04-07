@@ -8,8 +8,14 @@ import Login from './components/Auth/Login';
 import AdminPanel from './components/Admin/AdminPanel';
 import Dashboard from './components/Dashboard/Dashboard';
 import NotFound from './components/NotFound/NotFound';
+import Students from './components/Categories/Students';
+import Teachers from './components/Categories/Teachers';
+import Schedule from './components/Categories/Schedule';
+import Reports from './components/Categories/Reports';
+import Finance from './components/Categories/Finance';
+import Support from './components/Categories/Support';
 import { AuthProvider, useAuth } from './AuthContext';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
     const { user } = useAuth();
