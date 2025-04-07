@@ -1,21 +1,10 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../AuthContext';
 
 function Students() {
-  const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGroup, setSelectedGroup] = useState('all');
-  const { user } = useAuth();
-
-  useEffect(() => {
-    // In a real app, this would fetch from an API
-    setStudents([
-      { id: 1, name: 'Петренко Іван Михайлович', group: 'КН-31', status: 'Активний' },
-      { id: 2, name: 'Коваленко Марія Петрівна', group: 'КН-32', status: 'Академвідпустка' },
-      { id: 3, name: 'Сидоренко Олег Васильович', group: 'КН-31', status: 'Активний' },
-    ]);
-  }, []);
+  const { students } = useAuth();
 
   const filteredStudents = students.filter(student => {
     const matchesSearch = student.name.toLowerCase().includes(searchTerm.toLowerCase());
