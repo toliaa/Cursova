@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import pip from './pip.svg';
 import './App.css';
@@ -17,7 +17,6 @@ import Reports from './components/Categories/Reports';
 import Finance from './components/Categories/Finance';
 import Support from './components/Categories/Support';
 import { AuthProvider, useAuth } from './AuthContext';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
     const { user } = useAuth();
