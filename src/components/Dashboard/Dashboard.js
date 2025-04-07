@@ -1,61 +1,72 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuth } from '../../AuthContext';
-import { Navigate } from 'react-router-dom';
 import './Dashboard.css';
 
 function Dashboard() {
-  const { user } = useAuth();
-  const [profile, setProfile] = useState({
-    name: user?.name || '',
-    bio: user?.bio || '',
-    email: user?.email || ''
-  });
+    const { user, students, teachers, announcements } = useAuth();
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+    return (
+        <div className="dashboard-container container mt-5 pt-5">
+            <h2>Панель управління</h2>
+            
+            <div className="row mt-4">
+                <div className="col-md-4">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Студенти</h5>
+                            <p className="card-text">Загальна кількість: {students.length}</p>
+                            <p className="card-text">
+                                Активних: {students.filter(s => s.status === 'Активний').length}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="col-md-4">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Викладачі</h5>
+                            <p className="card-text">Загальна кількість: {teachers.length}</p>
+                            <p className="card-text">
+                                Кафедр: {new Set(teachers.map(t => t.department)).size}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="col-md-4">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Оголошення</h5>
+                            <p className="card-text">Активних: {announcements.length}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically update the profile in backend
-    alert('Profile updated successfully!');
-  };
-
-  return (
-    <div className="dashboard-container">
-      <h2>Dashboard</h2>
-      <div className="profile-section">
-        <img src={user.profileImage || 'https://via.placeholder.com/150'} alt="Profile" className="profile-image" />
-        <form onSubmit={handleSubmit} className="profile-form">
-          <div className="form-group">
-            <label>Name:</label>
-            <input
-              type="text"
-              value={profile.name}
-              onChange={(e) => setProfile({...profile, name: e.target.value})}
-            />
-          </div>
-          <div className="form-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              value={profile.email}
-              onChange={(e) => setProfile({...profile, email: e.target.value})}
-            />
-          </div>
-          <div className="form-group">
-            <label>Bio:</label>
-            <textarea
-              value={profile.bio}
-              onChange={(e) => setProfile({...profile, bio: e.target.value})}
-            />
-          </div>
-          <button type="submit" className="save-button">Save Changes</button>
-        </form>
-      </div>
-    </div>
-  );
+            <div className="row mt-4">
+                <div className="col-12">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Останні оголошення</h5>
+                            <div className="list-group">
+                                {announcements.map(announcement => (
+                                    <div key={announcement.id} className="list-group-item">
+                                        <div className="d-flex w-100 justify-content-between">
+                                            <h6 className="mb-1">{announcement.title}</h6>
+                                            <small>{announcement.date}</small>
+                                        </div>
+                                        <p className="mb-1">{announcement.content}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default Dashboard;
