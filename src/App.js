@@ -1,3 +1,4 @@
+
 import React from 'react';
 import pip from './pip.svg';
 import './App.css';
@@ -153,13 +154,6 @@ function Carousel() {
         </div>
     );
 }
-
-import Students from './components/Categories/Students';
-import Teachers from './components/Categories/Teachers';
-import Schedule from './components/Categories/Schedule';
-import Reports from './components/Categories/Reports';
-import Finance from './components/Categories/Finance';
-import Support from './components/Categories/Support';
 
 function BlocksContainer() {
     const navigate = useNavigate();
