@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../AuthContext';
 import { Navigate } from 'react-router-dom';
 
 function AdminPanel() {
-  const { user, addNews } = useAuth();
+  const { addNews } = useAuth();
   const [newsItem, setNewsItem] = useState({ title: '', content: '' });
   const [image, setImage] = useState(null);
   const [students, setStudents] = useState([]);
@@ -39,9 +38,6 @@ function AdminPanel() {
     }
   };
 
-  if (!user || user.role !== 'admin') {
-    return <Navigate to="/login" />;
-  }
 
   const handleNewsSubmit = (e) => {
     e.preventDefault();
@@ -59,7 +55,7 @@ function AdminPanel() {
   return (
     <div className="container mt-5 pt-5">
       <h2>Admin Panel</h2>
-      
+
       <div className="card mb-4">
         <div className="card-body">
           <h4>Управління студентами</h4>
@@ -183,7 +179,7 @@ function AdminPanel() {
           </div>
         </div>
       </div>
-      
+
       <div className="card mb-4">
         <div className="card-body">
           <h4>Add News</h4>

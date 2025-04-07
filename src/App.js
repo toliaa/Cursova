@@ -185,6 +185,19 @@ function BlocksContainer() {
     );
 }
 
+function ProtectedRoute({ children }) {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user || user.role !== 'admin') {
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
+    return user && user.role === 'admin' ? children : null;
+}
+
 function App() {
     return (
         <AuthProvider>
@@ -194,7 +207,11 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/contacts" element={<Contacts />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/admin" element={<AdminPanel />} />
+                    <Route path="/admin" element={
+                        <ProtectedRoute>
+                            <AdminPanel />
+                        </ProtectedRoute>
+                    } />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/students" element={<Students />} />
                     <Route path="/teachers" element={<Teachers />} />
