@@ -8,6 +8,21 @@ export const AuthProvider = ({ children }) => {
         return savedUser ? JSON.parse(savedUser) : null;
     });
     const [news, setNews] = useState([]);
+    const [students, setStudents] = useState([]);
+
+    const addStudent = (student) => {
+        setStudents(prev => [...prev, student]);
+    };
+
+    const updateStudent = (id, updatedData) => {
+        setStudents(prev => prev.map(student => 
+            student.id === id ? { ...student, ...updatedData } : student
+        ));
+    };
+
+    const deleteStudent = (id) => {
+        setStudents(prev => prev.filter(student => student.id !== id));
+    };
 
     const login = (userData) => {
         setUser(userData);
@@ -24,7 +39,17 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, news, addNews }}>
+        <AuthContext.Provider value={{ 
+            user, 
+            login, 
+            logout, 
+            news, 
+            addNews,
+            students,
+            addStudent,
+            updateStudent,
+            deleteStudent 
+        }}>
             {children}
         </AuthContext.Provider>
     );
