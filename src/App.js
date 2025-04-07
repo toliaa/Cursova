@@ -148,14 +148,35 @@ function Carousel() {
     );
 }
 
+import Students from './components/Categories/Students';
+import Teachers from './components/Categories/Teachers';
+import Schedule from './components/Categories/Schedule';
+import Reports from './components/Categories/Reports';
+import Finance from './components/Categories/Finance';
+import Support from './components/Categories/Support';
+
 function BlocksContainer() {
+    const navigate = useNavigate();
+    const blocks = [
+        { text: 'Студенти', path: '/students' },
+        { text: 'Викладачі', path: '/teachers' },
+        { text: 'Розклади', path: '/schedule' },
+        { text: 'Звіти', path: '/reports' },
+        { text: 'Фінанси', path: '/finance' },
+        { text: 'Підтримка', path: '/support' }
+    ];
+
     return (
         <div className="container mt-3">
             <div className="row">
-                {['Студенти', 'Викладачі', 'Розклади', 'Звіти', 'Фінанси', 'Підтримка'].map((text, index) => (
+                {blocks.map((block, index) => (
                     <div key={index} className="col-md-4 mb-3">
-                        <div className="block">
-                            {text}
+                        <div 
+                            className="block" 
+                            onClick={() => navigate(block.path)}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            {block.text}
                         </div>
                     </div>
                 ))}
@@ -175,6 +196,12 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/admin" element={<AdminPanel />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/students" element={<Students />} />
+                    <Route path="/teachers" element={<Teachers />} />
+                    <Route path="/schedule" element={<Schedule />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/finance" element={<Finance />} />
+                    <Route path="/support" element={<Support />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
