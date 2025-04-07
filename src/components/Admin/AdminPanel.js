@@ -31,6 +31,38 @@ function AdminPanel() {
       
       <div className="card mb-4">
         <div className="card-body">
+          <h4>Управління студентами</h4>
+          <div className="row">
+            <div className="col-md-12">
+              <button className="btn btn-primary mb-3">Додати нового студента</button>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>ПІБ</th>
+                    <th>Група</th>
+                    <th>Статус</th>
+                    <th>Дії</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Петренко Іван Михайлович</td>
+                    <td>КН-31</td>
+                    <td><span className="badge bg-success">Активний</span></td>
+                    <td>
+                      <button className="btn btn-sm btn-outline-primary me-1">Редагувати</button>
+                      <button className="btn btn-sm btn-outline-danger">Видалити</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="card mb-4">
+        <div className="card-body">
           <h4>Add News</h4>
           <form onSubmit={handleNewsSubmit}>
             <div className="mb-3">
